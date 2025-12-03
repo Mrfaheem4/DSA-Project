@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - E-commerce Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -11,8 +14,8 @@
     <nav class="navbar">
         <div class="container">
             <div class="navbar-brand">
-                <h1>🛒 TechStore</h1>
-                <p class="tagline">Your Tech Everything Store</p>
+                <h1>🛒 E-TECH</h1>
+                <p class="tagline">Ao Or Le Jao</p>
             </div>
             <div class="navbar-menu">
                 <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle dark/light theme">🌙</button>
@@ -30,9 +33,11 @@
             <h2>Available Products</h2>
             <div class="filters">
                 <button class="filter-btn active" onclick="filterProducts('all')">All</button>
-                <button class="filter-btn" onclick="filterProducts('Electronics')">Electronics</button>
+                <button class="filter-btn" onclick="filterProducts('Gaming')">Gaming</button>
+                <button class="filter-btn" onclick="filterProducts('Office Work')">Office Work</button>
+                <button class="filter-btn" onclick="filterProducts('Appliances')">Appliances</button>
                 <button class="filter-btn" onclick="filterProducts('Accessories')">Accessories</button>
-                <button class="filter-btn" onclick="filterProducts('Audio')">Audio</button>
+                <button class="filter-btn" onclick="filterProducts('Lights')">Lights</button>
             </div>
             <div id="productsList" class="products-grid">
                 <!-- Products will be loaded here by JS -->

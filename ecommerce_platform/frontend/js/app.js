@@ -80,7 +80,7 @@ function renderProducts(products) {
     productsList.innerHTML = products.map(product => `
         <div class="product-card">
             <div class="product-image">
-                ${productEmojis[product.name] || '📦'}
+                <img src="${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23ecf0f1%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${productEmojis[product.name] || '📦'}%3C/text%3E%3C/svg%3E'">
             </div>
             <div class="product-content">
                 <div class="product-name">${product.name}</div>
@@ -99,7 +99,7 @@ function renderProducts(products) {
                     ${product.stock <= 0 ? 'disabled' : ''}>
                     Add to Cart
                 </button>
-                <button class="add-to-cart-btn" style="background-color: #95a5a6; margin-top: 5px;"
+                <button class="add-to-cart-btn" style="margin-top: 5px;"
                     onclick="viewProductDetails(${product.id}, '${product.name}')">
                     View Details
                 </button>
@@ -117,8 +117,8 @@ function viewProductDetails(productId, productName) {
     document.getElementById('modalProductName').textContent = product.name;
     
     const detailsHTML = `
-        <div style="text-align: center; font-size: 100px; margin: 20px 0;">
-            ${productEmojis[product.name] || '📦'}
+        <div style="text-align: center; margin: 20px 0;">
+            <img src="${product.image}" alt="${product.name}" style="max-width: 300px; max-height: 300px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%23ecf0f1%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${productEmojis[product.name] || '📦'}%3C/text%3E%3C/svg%3E'">
         </div>
         <h3>Price</h3>
         <p style="font-size: 24px; color: #27ae60; font-weight: bold;">$${product.price.toFixed(2)}</p>
