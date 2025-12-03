@@ -635,16 +635,18 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 999;
     opacity: 0;
     pointer-events: none;
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(0px);
 }
 
 .cart-overlay.active {
     opacity: 1;
     pointer-events: all;
+    backdrop-filter: blur(8px);
 }
 
 /* Modals */
@@ -654,17 +656,19 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 2000;
     display: none;
     align-items: center;
     justify-content: center;
     animation: fadeIn 0.3s ease-in-out;
+    backdrop-filter: blur(0px);
 }
 
 .modal.active {
     display: flex;
     animation: fadeIn 0.3s ease-in-out;
+    backdrop-filter: blur(8px);
 }
 
 @keyframes fadeIn {
