@@ -16,50 +16,39 @@ orders_history = LinkedList()
 user_carts = {}  # Dictionary to store carts for each user
 order_history_stack = Stack()
 
-# Sample products database
-SAMPLE_PRODUCTS = [
-    # Gaming Category
-    {"id": 1, "name": "Gaming Laptop", "price": 1299.99, "stock": 8, "category": "Gaming", "description": "High-performance gaming laptop with RTX 4060", "image": "images/gaming_laptop.jpg"},
-    {"id": 2, "name": "Gaming Mouse", "price": 59.99, "stock": 40, "category": "Gaming", "description": "RGB gaming mouse with 16000 DPI", "image": "images/gaming_mouse.jpeg"},
-    {"id": 3, "name": "Gaming Keyboard", "price": 129.99, "stock": 25, "category": "Gaming", "description": "Mechanical gaming keyboard with RGB lighting", "image": "images/gaming_keyboard.jpg"},
-    {"id": 4, "name": "Gaming Headset", "price": 199.99, "stock": 20, "category": "Gaming", "description": "7.1 surround sound gaming headset", "image": "images/gaming_headset.jpeg"},
-    {"id": 5, "name": "Gaming Monitor", "price": 399.99, "stock": 12, "category": "Gaming", "description": "27-inch 144Hz gaming monitor", "image": "images/gaming_monitor.jpeg"},
-    
-    # Office Work Category
-    {"id": 6, "name": "Office Laptop", "price": 799.99, "stock": 15, "category": "Office Work", "description": "Lightweight laptop for office productivity", "image": "images/office_laptop.jpg"},
-    {"id": 7, "name": "Wireless Mouse", "price": 29.99, "stock": 50, "category": "Office Work", "description": "Ergonomic wireless mouse", "image": "images/wireless_mouse.jpeg"},
-    {"id": 8, "name": "Office Keyboard", "price": 79.99, "stock": 35, "category": "Office Work", "description": "Quiet mechanical keyboard for office", "image": "images/office_keyboard.jpeg"},
-    {"id": 9, "name": "USB-C Hub", "price": 49.99, "stock": 45, "category": "Office Work", "description": "7-in-1 USB-C hub for connectivity", "image": "images/usbc_hub.jpg"},
-    {"id": 10, "name": "Desk Lamp", "price": 39.99, "stock": 30, "category": "Office Work", "description": "LED desk lamp with adjustable brightness", "image": "images/desk_lamp.jpg"},
-    
-    # Appliances Category
-    {"id": 11, "name": "Smart Speaker", "price": 99.99, "stock": 25, "category": "Appliances", "description": "Voice-controlled smart speaker", "image": "images/smart_speaker.jpg"},
-    {"id": 12, "name": "Portable Charger", "price": 44.99, "stock": 60, "category": "Appliances", "description": "20000mAh power bank with fast charging", "image": "images/portable_charger.jpeg"},
-    {"id": 13, "name": "USB-C Charger", "price": 34.99, "stock": 55, "category": "Appliances", "description": "65W fast charging USB-C adapter", "image": "images/usbc_charger.jpg"},
-    {"id": 14, "name": "Wireless Charger", "price": 24.99, "stock": 50, "category": "Appliances", "description": "15W Qi wireless charging pad", "image": "images/wireless_charger.jpg"},
-    {"id": 15, "name": "Smart Thermostat", "price": 249.99, "stock": 10, "category": "Appliances", "description": "WiFi-enabled smart thermostat", "image": "images/smart_thermostat.jpeg"},
-    
-    # Accessories Category
-    {"id": 16, "name": "Phone Stand", "price": 19.99, "stock": 70, "category": "Accessories", "description": "Adjustable phone stand for desk", "image": "images/phone_stand.jpg"},
-    {"id": 17, "name": "Cable Organizer", "price": 14.99, "stock": 80, "category": "Accessories", "description": "Cable management organizer kit", "image": "images/cable_organizer.jpeg"},
-    {"id": 18, "name": "Screen Protector Pack", "price": 9.99, "stock": 100, "category": "Accessories", "description": "Pack of 3 tempered glass screen protectors", "image": "images/screen_protector.jpeg"},
-    {"id": 19, "name": "HDMI Cable", "price": 12.99, "stock": 90, "category": "Accessories", "description": "2m HDMI 2.1 cable", "image": "images/hdmi_cable.jpeg"},
-    {"id": 20, "name": "USB-A to USB-C", "price": 8.99, "stock": 120, "category": "Accessories", "description": "USB-A to USB-C adapter cable", "image": "images/usb_adapter.jpg"},
-    
-    # Lights Category
-    {"id": 21, "name": "RGB LED Strip", "price": 29.99, "stock": 40, "category": "Lights", "description": "5m RGB LED strip with remote control", "image": "images/rgb_ledstrip.jpg"},
-    {"id": 22, "name": "Smart Bulb", "price": 19.99, "stock": 55, "category": "Lights", "description": "WiFi-enabled smart LED bulb", "image": "images/smart_bulb.jpeg"},
-    {"id": 23, "name": "Desk Ring Light", "price": 69.99, "stock": 20, "category": "Lights", "description": "10-inch ring light for streaming", "image": "images/ring_light.jpg"},
-    {"id": 24, "name": "Ambient Light", "price": 39.99, "stock": 35, "category": "Lights", "description": "Smart ambient lighting system", "image": "images/ambient_light.jpeg"},
-    {"id": 25, "name": "Neon Sign", "price": 79.99, "stock": 15, "category": "Lights", "description": "Customizable neon LED sign", "image": "images/neon_sign.jpg"},
+# Load products from external file (products.txt)
+PRODUCTS_FILE = 'products.txt'
+
+TECH_KEYWORDS = [
+    'laptop', 'mouse', 'keyboard', 'monitor', 'headset', 'webcam', 'speaker',
+    'charger', 'usb', 'hdmi', 'thermostat', 'camera', 'power bank'
 ]
 
-# Initialize system
+TECH_CATEGORIES = ['gaming', 'office work', 'appliances', 'lights']
+
+def load_products_from_file():
+    try:
+        with open(PRODUCTS_FILE, 'r', encoding='utf-8') as f:
+            products = json.load(f)
+            return products
+    except Exception:
+        return []
+
+
+# Initialize system using products loaded from products.txt
 def initialize_system():
-    """Initialize products and inventory"""
-    for product in SAMPLE_PRODUCTS:
-        products_bst.insert(product["id"], product)
-        inventory_array.insert(product["id"], product["stock"])
+    products = load_products_from_file()
+    for product in products:
+        # Normalize category and name checks
+        name = product.get('name', '').lower()
+        cat = product.get('category', '').lower()
+
+        # If product matches tech keywords or belongs to a tech category, move to 'Tech'
+        if any(k in name for k in TECH_KEYWORDS) or (cat in TECH_CATEGORIES):
+            product['category'] = 'Tech'
+
+        products_bst.insert(product['id'], product)
+        inventory_array.insert(product['id'], product.get('stock', 0))
 
 initialize_system()
 
