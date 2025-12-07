@@ -25,16 +25,6 @@
         updateCartIcon();
     }
 
-    // Product Emojis
-    const productEmojis = {
-        'Laptop': '💻',
-        'Mouse': '🖱️',
-        'Keyboard': '⌨️',
-        'Monitor': '🖥️',
-        'Headphones': '🎧',
-        'Webcam': '📷'
-    };
-
     // State
     let allProducts = [];
     let filteredProducts = [];
@@ -110,7 +100,7 @@
         
         const detailsHTML = `
             <div style="text-align: center; margin: 20px 0;">
-                <img src="${product.image}" alt="${product.name}" style="max-width: 300px; max-height: 300px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%23ecf0f1%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${productEmojis[product.name] || '📦'}%3C/text%3E%3C/svg%3E'">
+                <img src="${product.image}" alt="${product.name}" style="max-width: 300px; max-height: 300px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%23ecf0f1%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${'📦'}%3C/text%3E%3C/svg%3E'">
             </div>
             <h3>Price</h3>
             <p style="font-size: 24px; color: #27ae60; font-weight: bold;">$${product.price.toFixed(2)}</p>
@@ -122,7 +112,7 @@
             <p>${product.description}</p>
             
             <h3>Availability</h3>
-            <p>${product.stock > 0 ? `✅ In Stock (${product.stock} units available)` : '❌ Out of Stock'}</p>
+            <p>${product.stock > 0 ? `In Stock (${product.stock} units available)` : ' Out of Stock'}</p>
             
             <h3>Details</h3>
             <ul style="list-style: none;">
