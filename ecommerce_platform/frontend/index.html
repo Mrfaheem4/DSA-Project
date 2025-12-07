@@ -3,45 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F.A.K </title>
+    <title>Luminara </title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <div class="navbar">
         <div class="container">
             <div class="navbar-brand">
-                <h1 class="brand-title">F.A.K </h1>
+                <h1 class="brand-title">Luminara </h1>
                 <p class="tagline">Contemporarly Minimal</p>
             </div>
             <div class="navbar-menu">
                 <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle dark/light theme">🌙</button>
                 <input type="text" id="searchInput" class="search-box" placeholder="Search products...">
                 <button class="cart-btn" onclick="toggleCart()">
-                    🛍️ Cart <span id="cartCount" class="cart-count">0</span>
+                    <img id = "cartIcon"src = "images/cart_icon_lightmode.png" alt ="Cart" class="cart-icon">
+                 <span id="cartCount" class="cart-count">0</span>
                 </button>
             </div>
         </div>
-    </nav>
+    </div>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slide active" style="background-image: url('images/red_nike_shoes.jpg');">
+            <div class="content">
+                <h1>New Collection 2025</h1>
+                <p>Upgrade your style this season</p>
+                <a href="#shop" class="btn">Shop Now</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('images/red_vans_shoes.jpg');">
+            <div class="content">
+                <h1>Streetwear Vibes</h1>
+                <p>Comfort meets fashion</p>
+                <a href="#shop" class="btn">Explore</a>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: url('images/grey_bag.jpg');">
+            <div class="content">
+                <h1>Modern Gear</h1>
+                <p>Elegant Yet Sleek</p>
+                <a href="#shop" class="btn">Explore</a>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: url('images/nike_shoes.jpg');">
+            <div class="content">
+                <h1>Streetwear Vibes</h1>
+                <p>Comfort meets fashion</p>
+                <a href="#shop" class="btn">Explore</a>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: url('images/heels_women.jpg');">
+            <div class="content">
+                <h1>Your style Your Choice</h1>
+                <p>Style your Life</p>
+                <a href="#shop" class="btn">Explore</a>
+            </div>
+        </div>
+
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </section>
 
     <div class="container main-content">
         <!-- Products Section -->
-        <section class="products-section">
+        <section class="products-section" id="shop">
             <h2>New Arrivals</h2>
             <div class="filters">
                 <button class="filter-btn active" onclick="filterProducts('all')">All</button>
-                <button class="filter-btn" onclick="filterProducts('Women')">Women</button>
-                <button class="filter-btn" onclick="filterProducts('Men')">Men</button>
                 <button class="filter-btn" onclick="filterProducts('Accessories')">Accessories</button>
                 <button class="filter-btn" onclick="filterProducts('Shoes')">Shoes</button>
                 <button class="filter-btn" onclick="filterProducts('Home')">Home</button>
                 <button class="filter-btn" onclick="filterProducts('Tech')">Tech</button>
+                <button class="filter-btn" onclick="filterProducts('Bag')">Bags</button>
             </div>
             <div id="productsList" class="products-grid">
-                <!-- Products will be loaded here by JS -->
             </div>
         </section>
     </div>
