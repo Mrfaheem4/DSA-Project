@@ -19,13 +19,6 @@ order_history_stack = Stack()
 # Load products from external file (products.txt)
 PRODUCTS_FILE = 'products.txt'
 
-TECH_KEYWORDS = [
-    'laptop', 'mouse', 'keyboard', 'monitor', 'headset', 'webcam', 'speaker',
-    'charger', 'usb', 'hdmi', 'thermostat', 'camera', 'power bank'
-]
-
-TECH_CATEGORIES = ['gaming', 'office work', 'appliances', 'lights']
-
 def load_products_from_file():
     try:
         with open(PRODUCTS_FILE, 'r', encoding='utf-8') as f:
@@ -34,18 +27,11 @@ def load_products_from_file():
     except Exception:
         return []
 
-
 # Initialize system using products loaded from products.txt
 def initialize_system():
     products = load_products_from_file()
     for product in products:
         # Normalize category and name checks
-        name = product.get('name', '').lower()
-        cat = product.get('category', '').lower()
-
-        # If product matches tech keywords or belongs to a tech category, move to 'Tech'
-        if any(k in name for k in TECH_KEYWORDS) or (cat in TECH_CATEGORIES):
-            product['category'] = 'Tech'
 
         products_bst.insert(product['id'], product)
         inventory_array.insert(product['id'], product.get('stock', 0))
